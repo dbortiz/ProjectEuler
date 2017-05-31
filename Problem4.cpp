@@ -4,26 +4,39 @@
 
 // Find the largest palindrome made from the product of two 3-digit numbers.
 #include <iostream>
-
 using namespace std;
 
+void Palindrome(int);
+
 int main(){
-	int a = 123456;
-	int b = 123456;
-	int arr[6], arr2[6];
-	// Original sequence
-	for(int i = 5; i >= 0; i--){
-		arr[i] = a % 10;
-		a /= 10;
-	}
+int num;
 
-	// Palindrome
-	for(int i = 0; i < 6; i++){
-		arr2[i] = b % 10;
-		b /= 10;
+// Loop to test out numbers
+for (int i = 100; i < 999; i++){
+	for (int j = 100; j < 999; j++){
+		num = i * j;
+		Palindrome(num);
+		}
 	}
-
-	cout << arr[5]<< endl;
-	cout << arr2[0];
 	return 0;
+}
+
+// Function to determine palindrome or not
+void Palindrome(int num){
+	int arr[6];
+	int arr2[6];
+
+	for(int i = 5; i >= 0; i--){
+		arr[i] = num % 10;
+		num /= 10;
+	}
+
+	for(int i = 0; i < 6; i++){
+		arr2[i] = num % 10;
+		num /= 10;
+	}
+
+	if(arr == arr2){
+		cout << num;
+	}
 }
