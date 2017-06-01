@@ -14,8 +14,8 @@ int main(){
 int num;
 
 // Loop to test out numbers
-for (int i = 10; i < 100; i++){
-	for (int j = 10; j < 100; j++){
+for (int i = 100; i < 1000; i++){
+	for (int j = 100; j < 1000; j++){
 		num = i * j;
 		Palindrome(num);
 		}
@@ -25,18 +25,18 @@ for (int i = 10; i < 100; i++){
 
 // Function to determine palindrome or not
 void Palindrome(const int num){
-	int arr[4];
-	int arr2[4];
+	int arr[6];
+	int arr2[6];
 	int num1 = num;
 	int num2 = num;
 
 
-	for(int i = arr; i >= 0; i--){
+	for(int i = 5; i >= 0; i--){
 		arr[i] = num1 % 10;
 		num1 /= 10;
 	}
 
-	for(int i = 0; i < 4; i++){
+	for(int i = 0; i < 6; i++){
 		arr2[i] = num2 % 10;
 		num2 /= 10;
 	}
@@ -45,22 +45,13 @@ void Palindrome(const int num){
 	if(checkArrays(arr, arr2)){
 		cout << num << endl;
 	}
-
-//	for(int i = 0; i < 6; i++){
-//		if(arr[i] != arr2[i]){
-//			break;
-//		}else{
-//			cout << num;
-//		}
-//	}
 }
 
 bool checkArrays(int arr[], int arr2[]){
 	for(int i = 0; i < 6; i++){
 		if(arr[i] != arr2[i]){
 			return false;
-		}else{
-			return true;
 		}
 	}
+	return true;
 }
