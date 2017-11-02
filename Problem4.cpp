@@ -4,54 +4,57 @@
 
 // Find the largest palindrome made from the product of two 3-digit numbers.
 #include <iostream>
-#include <array>
+#include <string>
+
 using namespace std;
 
-void Palindrome(const int);
-bool checkArrays(int [], int []);
+bool checkPalindrome(int&); //Prototype to Palindrome function
 
-int main(){
-int num;
+struct Node { //struct to hold numbers that are palindromes
+	int number;
+	Node *next;
+	Node(int numberValue, Node *nextValue) {
+		number = numberValue;
+		next = nextValue;
+	}
+};
 
-// Loop to test out numbers
-for (int i = 100; i < 1000; i++){
-	for (int j = 100; j < 1000; j++){
-		num = i * j;
-		Palindrome(num);
+
+int main() {
+	int currentNumber = 0; //int to hold the current number the palindrome function would check
+	Node *arr = NULL; //Created head of list
+	for (int i = 100; i < 1000; i++) { //Nested for-loop to multiply two 3-digit numbers
+		for (int j = 100; j < 1000; j++) {
+			currentNumber = i * j;
+			if (checkPalindrome(currentNumber)) { //Checks if the number is a palindrome
+				arr = new Node(currentNumber, arr); //Creates another node and adds to list if number passes palindrome check
+			}
 		}
 	}
+
+	while (arr != NULL) { //while-loop to print out the nodes' number values
+		cout << arr->number << endl;
+		arr = arr->next;
+	}
+	system("PAUSE");
 	return 0;
 }
 
-// Function to determine palindrome or not
-void Palindrome(const int num){
-	int arr[6];
-	int arr2[6];
-	int num1 = num;
-	int num2 = num;
-
-
-	for(int i = 5; i >= 0; i--){
-		arr[i] = num1 % 10;
-		num1 /= 10;
-	}
-
-	for(int i = 0; i < 6; i++){
-		arr2[i] = num2 % 10;
-		num2 /= 10;
-	}
-
-
-	if(checkArrays(arr, arr2)){
-		cout << num << endl;
-	}
-}
-
-bool checkArrays(int arr[], int arr2[]){
-	for(int i = 0; i < 6; i++){
-		if(arr[i] != arr2[i]){
-			return false;
+//Function to check whether a number is a palindrome
+bool checkPalindrome(int &i) { 
+	string num = to_string(i); //Converts the number from an int to a string
+	int lengthOfString = num.length(); //int to hold the length value of the number
+	int not = 0; //int to break out of loop
+	for (int i = 0; i < lengthOfString; i++) { //for-loop to check if the indexes's values are mirrored
+		if (num[i] != num[lengthOfString - i - 1]) { //if-statement to compare indexes
+			not = 1; //If the number is not a palindrome, it assigns not to 1 and breaks 
+			break; 
 		}
 	}
-	return true;
+	if (not) { //if-else statement to return true or false on whether the number is a palindrome or not
+		return false;
+	}
+	else {
+		return true;
+	}
 }
