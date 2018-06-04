@@ -5,7 +5,7 @@ number = "7316717653133062491922511967442657474235534919493496983520312774506326
 
 
 pos = 0
-products = []
+largest_product = 0
 
 # Creates products for 13 digits and appends them to a list
 while pos < (len(number) - 1):
@@ -15,9 +15,7 @@ while pos < (len(number) - 1):
     while i < (len(temp_list)):
         temp_product *= int(temp_list[i])
         i += 1
-    products.append(temp_product)
+    if temp_product > largest_product:
+	largest_product = temp_product
     pos += 1
-
-# Finds the largest product in the list
-largest_product = max(products)
 print largest_product #23514624000
